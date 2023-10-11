@@ -1,0 +1,13 @@
+logs:
+    - name: root
+      level: info
+      appenders:
+          - type: FileLogAppender
+            file: /home/wwt/chat_room/bin/root.txt
+          - type: StdoutLogAppender
+    - name: system
+      level: info
+      appenders:
+          - type: FileLogAppender
+            file: /home/wwt/chat_room/bin/system.txt
+          - type: StdoutLogAppender

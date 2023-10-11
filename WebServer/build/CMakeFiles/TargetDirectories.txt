@@ -1,0 +1,4 @@
+/home/wwt/chat_room/WebServer/build/CMakeFiles/rebuild_cache.dir
+/home/wwt/chat_room/WebServer/build/CMakeFiles/edit_cache.dir
+/home/wwt/chat_room/WebServer/build/CMakeFiles/bin_sylar.dir
+/home/wwt/chat_room/WebServer/build/CMakeFiles/sylar.dir

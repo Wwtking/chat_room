@@ -1,0 +1,4 @@
+# Hashes of file build rules.
+d478db50481754fd6c64799cc6852952 ../WebServer/src/http/httpclient_parser.rl.cpp
+7533492ead778d3a6d22863604936766 ../WebServer/src/http/httpserver_parser.rl.cpp
+e294330e9ae59719136d0aef326c3ea6 ../WebServer/src/uri.rl.cpp
