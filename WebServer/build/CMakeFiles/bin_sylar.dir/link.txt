@@ -1,5 +1,1 @@
-<<<<<<< HEAD
 /usr/bin/c++   -rdynamic -O3 -fPIC -ggdb -std=c++11 -Wall -Wno-deprecated -Werror -Wno-unused-function -Wno-builtin-macro-redefined -Wno-deprecated-declarations  -rdynamic CMakeFiles/bin_sylar.dir/src/main.cpp.o  -o ../bin/sylar  -L/home/wwt/sylar/lib -Wl,-rpath,/home/wwt/chat_room/WebServer/lib:/home/wwt/sylar/lib ../lib/libsylar.so -ldl -lyaml-cpp -ljsoncpp -lpthread -lssl -lcrypto 
-=======
-/usr/bin/c++   -rdynamic -O3 -fPIC -ggdb -std=c++11 -Wall -Wno-deprecated -Werror -Wno-unused-function -Wno-builtin-macro-redefined -Wno-deprecated-declarations  -rdynamic CMakeFiles/bin_sylar.dir/src/main.cpp.o  -o ../bin/sylar  -L/home/wwt/sylar/lib -Wl,-rpath,/home/wwt/sylar/lib ../lib/libsylar.so -ldl -lyaml-cpp -ljsoncpp -lpthread -lssl -lcrypto 
->>>>>>> 3d7f434eaa6fd139dcd6ef0f9649f7fb557d74d3
