@@ -1,0 +1,5 @@
+sqlite3:
+    dbs:
+        chat:
+            path: chat.db
+            sql: PRAGMA synchronous = OFF

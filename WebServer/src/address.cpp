@@ -24,7 +24,6 @@ static T CreatMask(uint32_t prefix_len) {
 }
 
 
-
 /**
  * @brief 用于计算给定值val的二进制表示中包含的1的个数
  * @param[in] T 给定值val

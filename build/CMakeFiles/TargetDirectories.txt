@@ -4,4 +4,10 @@
 /home/wwt/chat_room/build/WebServer/CMakeFiles/rebuild_cache.dir
 /home/wwt/chat_room/build/WebServer/CMakeFiles/edit_cache.dir
 /home/wwt/chat_room/build/WebServer/CMakeFiles/bin_sylar.dir
+/home/wwt/chat_room/build/WebServer/CMakeFiles/orm.dir
+/home/wwt/chat_room/build/WebServer/CMakeFiles/email_test.dir
+/home/wwt/chat_room/build/WebServer/CMakeFiles/sqlite3_test.dir
 /home/wwt/chat_room/build/WebServer/CMakeFiles/sylar.dir
+/home/wwt/chat_room/build/orm_out/CMakeFiles/rebuild_cache.dir
+/home/wwt/chat_room/build/orm_out/CMakeFiles/edit_cache.dir
+/home/wwt/chat_room/build/orm_out/CMakeFiles/orm_data.dir

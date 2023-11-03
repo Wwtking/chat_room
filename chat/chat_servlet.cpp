@@ -2,6 +2,7 @@
 #include "log.h"
 #include "chat_message.h"
 #include "util.h"
+#include "struct.h"
 
 namespace chat {
 
@@ -133,6 +134,15 @@ int32_t ChatWSServlet::handle(sylar::http::HttpRequest::ptr req,
     std::string type = cmsg->get("type");
     if(type == "login_request") {
         rsp->set("type", "login_response");
+
+        // 如果Cookie中没有SESSION_KEY或USER_ID，说明没有登录
+        std::string sid = req->getCookie(CookieKey::SESSION_KEY);
+        if(sid.empty() || !sylar::http::SessionDataMgr::GetInstance()->get(sid)) {
+            rsp->set("result", "408");
+            rsp->set("msg", "not login");
+            return SendMessage(session, rsp);
+        }
+
         std::string name = cmsg->get("name");
         if(name.empty()) {
             rsp->set("result", "400");

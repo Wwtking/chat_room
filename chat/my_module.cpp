@@ -5,10 +5,27 @@
 #include "resource_servlet.h"
 #include "chat_servlet.h"
 #include "env.h"
+#include "mysqlite3.h"
+#include "user_info.h"
+#include "user_create_servlet.h"
+#include "user_active_servlet.h"
+#include "user_login_servlet.h"
+#include "user_clear_servlet.h"
+#include "user_logout_servlet.h"
+#include "user_modify_servlet.h"
+#include "user_forget_passwd_servlet.h"
+#include "user_change_passwd_servlet.h"
+#include "file_upload_servlet.h"
+#include "file_query_servlet.h"
+#include "file_download_servlet.h"
+#include "user_manager.h"
 
 namespace chat {
 
 static sylar::Logger::ptr g_logger = SYLAR_LOG_NAME("system");
+
+static sylar::ConfigVar<std::string>::ptr g_sqlite3_db_name = 
+    sylar::Config::Lookup("sqlite3.db_name", std::string("chat.db"), "sqlite3 db name");
 
 MyModule::MyModule() 
     :Module("chat_room", "1.0", "") {
@@ -35,12 +52,40 @@ bool MyModule::onUnLoad() {
 bool MyModule::onServerReady() {
     SYLAR_LOG_INFO(g_logger) << "onServerReady";
 
+    // 创建数据库db
+    auto work_path = sylar::Config::Lookup<std::string>("server.work_path");
+    auto db_path = work_path->getValue() + "/" + g_sqlite3_db_name->getValue();
+    sylar::SQLite3::ptr db;
+    // 如果db_path路径下数据库已经存在，则以READWRITE形式返回现有的数据库
+    db = sylar::SQLite3::Create(db_path, sylar::SQLite3::READWRITE);
+    if(!db) {
+        SYLAR_LOG_INFO(g_logger) << "init database begin";
+        // 创建新的数据库
+        db = sylar::SQLite3::Create(db_path);
+        if(!db) {
+            SYLAR_LOG_ERROR(g_logger) << "open database db=" << db_path << " failed";
+            return false;
+        }
+        // 创建表
+        if(chat::data::UserInfoDao::CreateTableSQLite3(db)) {
+            SYLAR_LOG_ERROR(g_logger) << "create table user failed";
+            return false;
+        }
+        SYLAR_LOG_INFO(g_logger) << "init database end";
+    }
+    
+    // 加载数据库所有用户数据，存放到后端类中
+    if(!UserMgr::GetInstance()->loadAll()) { 
+        SYLAR_LOG_ERROR(g_logger) << "UserMgr load all fail";
+    }
+
+    // 获取http服务器
     std::vector<sylar::TcpServer::ptr> servers;
     if(!sylar::Application::Getinstance()->getServer("http", servers)) {
         SYLAR_LOG_INFO(g_logger) << "no httpServer alive";
         return false;
     }
-    
+    // 放置servlet
     for(auto& i : servers) {
         auto http_server = std::dynamic_pointer_cast<sylar::http::HttpServer>(i);
         if(!http_server) {
@@ -48,22 +93,51 @@ bool MyModule::onServerReady() {
         }
         auto sltDisp = http_server->getDispatch();
 
+        // 读html界面的servlet
         sylar::http::ResourceServlet::ptr slt = 
             std::make_shared<sylar::http::ResourceServlet>(sylar::EnvMgr::GetInstance()->getCwd());
-
         // sltDisp->addGlobServlet("/html/*", handle);
         sltDisp->addGlobServlet("/html/*", slt);
         sltDisp->addGlobServlet("/css/*", slt);
         sltDisp->addGlobServlet("/image/*", slt);
+        sltDisp->addGlobServlet("/js/*", slt);
+        sltDisp->addGlobServlet("/files/*", slt);
+
+#define XX(name) sylar::http::HttpServlet::ptr(new chat::servlet::name)
+        sltDisp->addServlet("/user/create", XX(UserCreateServlet));
+        sltDisp->addServlet("/user/active", XX(UserActiveServlet));
+        sltDisp->addServlet("/user/login", XX(UserLoginServlet));
+        sltDisp->addServlet("/user/logout", XX(UserLogoutServlet));
+        sltDisp->addServlet("/user/modify", XX(UserModifyServlet));
+        sltDisp->addServlet("/user/forgetPasswd", XX(UserForgetPasswdServlet));
+        sltDisp->addServlet("/user/changePasswd", XX(UserChangePasswdServlet));
+
+        /// 调试用，清空数据库，删除所有账号，实测要关掉
+        sltDisp->addServlet("/user/clear", XX(UserClearServlet));
+#undef XX
+
+        chat::servlet::FileUploadServlet::ptr fileUploadSlt = 
+            std::make_shared<chat::servlet::FileUploadServlet>(sylar::EnvMgr::GetInstance()->getCwd()+"/files");
+        sltDisp->addServlet("/file/upload", fileUploadSlt);
+
+        chat::servlet::FileQueryServlet::ptr fileQuerySlt = 
+            std::make_shared<chat::servlet::FileQueryServlet>(sylar::EnvMgr::GetInstance()->getCwd()+"/files");
+        sltDisp->addServlet("/file/query", fileQuerySlt);
+
+        chat::servlet::FileDownloadServlet::ptr fileDownloadSlt = 
+            std::make_shared<chat::servlet::FileDownloadServlet>(sylar::EnvMgr::GetInstance()->getCwd()+"/files");
+        sltDisp->addGlobServlet("/file/download/*", fileDownloadSlt);
+        
         SYLAR_LOG_INFO(g_logger) << "addServlet";
     }
 
+    // 获取ws服务器
     servers.clear();
     if(!sylar::Application::Getinstance()->getServer("ws", servers)) {
         SYLAR_LOG_INFO(g_logger) << "no ws alive";
         return false;
     }
-
+    // 放置servlet
     for(auto& i : servers) {
         auto ws_server = std::dynamic_pointer_cast<sylar::http::WSServer>(i);
         if(!ws_server) {

@@ -6,7 +6,7 @@ CXX_FLAGS =  -rdynamic -O3 -fPIC -ggdb -std=c++11 -Wall -Wno-deprecated -Werror 
 
 CXX_DEFINES = -Dsylar_EXPORTS
 
-CXX_INCLUDES = -I/home/wwt/chat_room/WebServer/include -I/home/wwt/chat_room/WebServer/include/http -I/home/wwt/chat_room/WebServer/include/stream -I/home/wwt/chat_room/WebServer/include/util 
+CXX_INCLUDES = -I/home/wwt/chat_room/WebServer/include -I/home/wwt/chat_room/WebServer/include/http -I/home/wwt/chat_room/WebServer/include/stream -I/home/wwt/chat_room/WebServer/include/util -I/home/wwt/chat_room/WebServer/include/db -I/home/wwt/chat_room/WebServer/include/orm -I/home/wwt/chat_room/WebServer/include/email 
 
 # Custom defines: WebServer/CMakeFiles/sylar.dir/src/log.cpp.o_DEFINES = __FILE__="src/log.cpp"
 
@@ -17,6 +17,8 @@ CXX_INCLUDES = -I/home/wwt/chat_room/WebServer/include -I/home/wwt/chat_room/Web
 # Custom defines: WebServer/CMakeFiles/sylar.dir/src/util/json_util.cpp.o_DEFINES = __FILE__="src/util/json_util.cpp"
 
 # Custom defines: WebServer/CMakeFiles/sylar.dir/src/config.cpp.o_DEFINES = __FILE__="src/config.cpp"
+
+# Custom defines: WebServer/CMakeFiles/sylar.dir/src/db/mysqlite3.cpp.o_DEFINES = __FILE__="src/db/mysqlite3.cpp"
 
 # Custom defines: WebServer/CMakeFiles/sylar.dir/src/thread.cpp.o_DEFINES = __FILE__="src/thread.cpp"
 
@@ -58,6 +60,8 @@ CXX_INCLUDES = -I/home/wwt/chat_room/WebServer/include -I/home/wwt/chat_room/Web
 
 # Custom defines: WebServer/CMakeFiles/sylar.dir/src/http/ws_servlet.cpp.o_DEFINES = __FILE__="src/http/ws_servlet.cpp"
 
+# Custom defines: WebServer/CMakeFiles/sylar.dir/src/http/session_data.cpp.o_DEFINES = __FILE__="src/http/session_data.cpp"
+
 # Custom defines: WebServer/CMakeFiles/sylar.dir/src/tcp_server.cpp.o_DEFINES = __FILE__="src/tcp_server.cpp"
 
 # Custom defines: WebServer/CMakeFiles/sylar.dir/src/stream/stream.cpp.o_DEFINES = __FILE__="src/stream/stream.cpp"
@@ -75,6 +79,10 @@ CXX_INCLUDES = -I/home/wwt/chat_room/WebServer/include -I/home/wwt/chat_room/Web
 # Custom defines: WebServer/CMakeFiles/sylar.dir/src/library.cpp.o_DEFINES = __FILE__="src/library.cpp"
 
 # Custom defines: WebServer/CMakeFiles/sylar.dir/src/worker.cpp.o_DEFINES = __FILE__="src/worker.cpp"
+
+# Custom defines: WebServer/CMakeFiles/sylar.dir/src/email/email.cpp.o_DEFINES = __FILE__="src/email/email.cpp"
+
+# Custom defines: WebServer/CMakeFiles/sylar.dir/src/email/smtp.cpp.o_DEFINES = __FILE__="src/email/smtp.cpp"
 
 # Custom defines: WebServer/CMakeFiles/sylar.dir/src/http/httpserver_parser.rl.cpp.o_DEFINES = __FILE__="src/http/httpserver_parser.rl.cpp"
 

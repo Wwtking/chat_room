@@ -71,10 +71,10 @@ CMAKE_BINARY_DIR = /home/wwt/chat_room/build
 # Target rules for target CMakeFiles/chat_room.dir
 
 # All Build rule for target.
-CMakeFiles/chat_room.dir/all:
+CMakeFiles/chat_room.dir/all: orm_out/CMakeFiles/orm_data.dir/all
 	$(MAKE) -f CMakeFiles/chat_room.dir/build.make CMakeFiles/chat_room.dir/depend
 	$(MAKE) -f CMakeFiles/chat_room.dir/build.make CMakeFiles/chat_room.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wwt/chat_room/build/CMakeFiles --progress-num=3,4,5,6,7 "Built target chat_room"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wwt/chat_room/build/CMakeFiles --progress-num=3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21 "Built target chat_room"
 .PHONY : CMakeFiles/chat_room.dir/all
 
 # Include target in all.
@@ -84,7 +84,7 @@ all: CMakeFiles/chat_room.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/chat_room.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/wwt/chat_room/build/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wwt/chat_room/build/CMakeFiles 21
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/chat_room.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/wwt/chat_room/build/CMakeFiles 0
 .PHONY : CMakeFiles/chat_room.dir/rule
@@ -109,12 +109,18 @@ clean: CMakeFiles/chat_room.dir/clean
 
 # Convenience name for "all" pass in the directory.
 WebServer/all: WebServer/CMakeFiles/bin_sylar.dir/all
+WebServer/all: WebServer/CMakeFiles/orm.dir/all
+WebServer/all: WebServer/CMakeFiles/email_test.dir/all
+WebServer/all: WebServer/CMakeFiles/sqlite3_test.dir/all
 WebServer/all: WebServer/CMakeFiles/sylar.dir/all
 
 .PHONY : WebServer/all
 
 # Convenience name for "clean" pass in the directory.
 WebServer/clean: WebServer/CMakeFiles/bin_sylar.dir/clean
+WebServer/clean: WebServer/CMakeFiles/orm.dir/clean
+WebServer/clean: WebServer/CMakeFiles/email_test.dir/clean
+WebServer/clean: WebServer/CMakeFiles/sqlite3_test.dir/clean
 WebServer/clean: WebServer/CMakeFiles/sylar.dir/clean
 
 .PHONY : WebServer/clean
@@ -141,7 +147,7 @@ all: WebServer/CMakeFiles/bin_sylar.dir/all
 
 # Build rule for subdir invocation for target.
 WebServer/CMakeFiles/bin_sylar.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/wwt/chat_room/build/CMakeFiles 43
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wwt/chat_room/build/CMakeFiles 47
 	$(MAKE) -f CMakeFiles/Makefile2 WebServer/CMakeFiles/bin_sylar.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/wwt/chat_room/build/CMakeFiles 0
 .PHONY : WebServer/CMakeFiles/bin_sylar.dir/rule
@@ -162,13 +168,124 @@ clean: WebServer/CMakeFiles/bin_sylar.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Target rules for target WebServer/CMakeFiles/orm.dir
+
+# All Build rule for target.
+WebServer/CMakeFiles/orm.dir/all: WebServer/CMakeFiles/sylar.dir/all
+	$(MAKE) -f WebServer/CMakeFiles/orm.dir/build.make WebServer/CMakeFiles/orm.dir/depend
+	$(MAKE) -f WebServer/CMakeFiles/orm.dir/build.make WebServer/CMakeFiles/orm.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wwt/chat_room/build/CMakeFiles --progress-num=24,25,26,27,28,29,30 "Built target orm"
+.PHONY : WebServer/CMakeFiles/orm.dir/all
+
+# Include target in all.
+all: WebServer/CMakeFiles/orm.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+WebServer/CMakeFiles/orm.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wwt/chat_room/build/CMakeFiles 52
+	$(MAKE) -f CMakeFiles/Makefile2 WebServer/CMakeFiles/orm.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wwt/chat_room/build/CMakeFiles 0
+.PHONY : WebServer/CMakeFiles/orm.dir/rule
+
+# Convenience name for target.
+orm: WebServer/CMakeFiles/orm.dir/rule
+
+.PHONY : orm
+
+# clean rule for target.
+WebServer/CMakeFiles/orm.dir/clean:
+	$(MAKE) -f WebServer/CMakeFiles/orm.dir/build.make WebServer/CMakeFiles/orm.dir/clean
+.PHONY : WebServer/CMakeFiles/orm.dir/clean
+
+# clean rule for target.
+clean: WebServer/CMakeFiles/orm.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target WebServer/CMakeFiles/email_test.dir
+
+# All Build rule for target.
+WebServer/CMakeFiles/email_test.dir/all: WebServer/CMakeFiles/sylar.dir/all
+	$(MAKE) -f WebServer/CMakeFiles/email_test.dir/build.make WebServer/CMakeFiles/email_test.dir/depend
+	$(MAKE) -f WebServer/CMakeFiles/email_test.dir/build.make WebServer/CMakeFiles/email_test.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wwt/chat_room/build/CMakeFiles --progress-num=22,23 "Built target email_test"
+.PHONY : WebServer/CMakeFiles/email_test.dir/all
+
+# Include target in all.
+all: WebServer/CMakeFiles/email_test.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+WebServer/CMakeFiles/email_test.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wwt/chat_room/build/CMakeFiles 47
+	$(MAKE) -f CMakeFiles/Makefile2 WebServer/CMakeFiles/email_test.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wwt/chat_room/build/CMakeFiles 0
+.PHONY : WebServer/CMakeFiles/email_test.dir/rule
+
+# Convenience name for target.
+email_test: WebServer/CMakeFiles/email_test.dir/rule
+
+.PHONY : email_test
+
+# clean rule for target.
+WebServer/CMakeFiles/email_test.dir/clean:
+	$(MAKE) -f WebServer/CMakeFiles/email_test.dir/build.make WebServer/CMakeFiles/email_test.dir/clean
+.PHONY : WebServer/CMakeFiles/email_test.dir/clean
+
+# clean rule for target.
+clean: WebServer/CMakeFiles/email_test.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target WebServer/CMakeFiles/sqlite3_test.dir
+
+# All Build rule for target.
+WebServer/CMakeFiles/sqlite3_test.dir/all: WebServer/CMakeFiles/sylar.dir/all
+	$(MAKE) -f WebServer/CMakeFiles/sqlite3_test.dir/build.make WebServer/CMakeFiles/sqlite3_test.dir/depend
+	$(MAKE) -f WebServer/CMakeFiles/sqlite3_test.dir/build.make WebServer/CMakeFiles/sqlite3_test.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wwt/chat_room/build/CMakeFiles --progress-num=33,34 "Built target sqlite3_test"
+.PHONY : WebServer/CMakeFiles/sqlite3_test.dir/all
+
+# Include target in all.
+all: WebServer/CMakeFiles/sqlite3_test.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+WebServer/CMakeFiles/sqlite3_test.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wwt/chat_room/build/CMakeFiles 47
+	$(MAKE) -f CMakeFiles/Makefile2 WebServer/CMakeFiles/sqlite3_test.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wwt/chat_room/build/CMakeFiles 0
+.PHONY : WebServer/CMakeFiles/sqlite3_test.dir/rule
+
+# Convenience name for target.
+sqlite3_test: WebServer/CMakeFiles/sqlite3_test.dir/rule
+
+.PHONY : sqlite3_test
+
+# clean rule for target.
+WebServer/CMakeFiles/sqlite3_test.dir/clean:
+	$(MAKE) -f WebServer/CMakeFiles/sqlite3_test.dir/build.make WebServer/CMakeFiles/sqlite3_test.dir/clean
+.PHONY : WebServer/CMakeFiles/sqlite3_test.dir/clean
+
+# clean rule for target.
+clean: WebServer/CMakeFiles/sqlite3_test.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target WebServer/CMakeFiles/sylar.dir
 
 # All Build rule for target.
 WebServer/CMakeFiles/sylar.dir/all:
 	$(MAKE) -f WebServer/CMakeFiles/sylar.dir/build.make WebServer/CMakeFiles/sylar.dir/depend
 	$(MAKE) -f WebServer/CMakeFiles/sylar.dir/build.make WebServer/CMakeFiles/sylar.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wwt/chat_room/build/CMakeFiles --progress-num=8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48 "Built target sylar"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wwt/chat_room/build/CMakeFiles --progress-num=35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79 "Built target sylar"
 .PHONY : WebServer/CMakeFiles/sylar.dir/all
 
 # Include target in all.
@@ -178,7 +295,7 @@ all: WebServer/CMakeFiles/sylar.dir/all
 
 # Build rule for subdir invocation for target.
 WebServer/CMakeFiles/sylar.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/wwt/chat_room/build/CMakeFiles 41
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wwt/chat_room/build/CMakeFiles 45
 	$(MAKE) -f CMakeFiles/Makefile2 WebServer/CMakeFiles/sylar.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/wwt/chat_room/build/CMakeFiles 0
 .PHONY : WebServer/CMakeFiles/sylar.dir/rule
@@ -195,6 +312,61 @@ WebServer/CMakeFiles/sylar.dir/clean:
 
 # clean rule for target.
 clean: WebServer/CMakeFiles/sylar.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory orm_out
+
+# Convenience name for "all" pass in the directory.
+orm_out/all: orm_out/CMakeFiles/orm_data.dir/all
+
+.PHONY : orm_out/all
+
+# Convenience name for "clean" pass in the directory.
+orm_out/clean: orm_out/CMakeFiles/orm_data.dir/clean
+
+.PHONY : orm_out/clean
+
+# Convenience name for "preinstall" pass in the directory.
+orm_out/preinstall:
+
+.PHONY : orm_out/preinstall
+
+#=============================================================================
+# Target rules for target orm_out/CMakeFiles/orm_data.dir
+
+# All Build rule for target.
+orm_out/CMakeFiles/orm_data.dir/all:
+	$(MAKE) -f orm_out/CMakeFiles/orm_data.dir/build.make orm_out/CMakeFiles/orm_data.dir/depend
+	$(MAKE) -f orm_out/CMakeFiles/orm_data.dir/build.make orm_out/CMakeFiles/orm_data.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wwt/chat_room/build/CMakeFiles --progress-num=31,32 "Built target orm_data"
+.PHONY : orm_out/CMakeFiles/orm_data.dir/all
+
+# Include target in all.
+all: orm_out/CMakeFiles/orm_data.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+orm_out/CMakeFiles/orm_data.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wwt/chat_room/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 orm_out/CMakeFiles/orm_data.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wwt/chat_room/build/CMakeFiles 0
+.PHONY : orm_out/CMakeFiles/orm_data.dir/rule
+
+# Convenience name for target.
+orm_data: orm_out/CMakeFiles/orm_data.dir/rule
+
+.PHONY : orm_data
+
+# clean rule for target.
+orm_out/CMakeFiles/orm_data.dir/clean:
+	$(MAKE) -f orm_out/CMakeFiles/orm_data.dir/build.make orm_out/CMakeFiles/orm_data.dir/clean
+.PHONY : orm_out/CMakeFiles/orm_data.dir/clean
+
+# clean rule for target.
+clean: orm_out/CMakeFiles/orm_data.dir/clean
 
 .PHONY : clean
 

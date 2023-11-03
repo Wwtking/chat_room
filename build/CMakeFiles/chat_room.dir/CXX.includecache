@@ -74,18 +74,6 @@ http.h
 socket_stream.h
 ../WebServer/include/http/socket_stream.h
 
-../WebServer/include/http/ws_servlet.h
-http_servlet.h
-../WebServer/include/http/http_servlet.h
-ws_session.h
-../WebServer/include/http/ws_session.h
-
-../WebServer/include/http/ws_session.h
-memory
--
-http_session.h
-../WebServer/include/http/http_session.h
-
 ../WebServer/include/json/allocator.h
 cstring
 -
@@ -225,6 +213,10 @@ address.h
 ../WebServer/include/address.h
 noncopyable.h
 ../WebServer/include/noncopyable.h
+openssl/err.h
+-
+openssl/ssl.h
+-
 
 ../WebServer/include/stream/socket_stream.h
 stream.h
@@ -273,6 +265,18 @@ string
 -
 boost/lexical_cast.hpp
 -
+hash_util.h
+../WebServer/include/hash_util.h
+json_util.h
+../WebServer/include/json_util.h
+
+../WebServer/include/util/hash_util.h
+stdint.h
+-
+string
+-
+vector
+-
 
 ../WebServer/include/util/json_util.h
 string
@@ -280,27 +284,15 @@ string
 json/json.h
 -
 
-/home/wwt/chat_room/chat/chat_message.h
-memory
--
-json_util.h
-/home/wwt/chat_room/chat/json_util.h
-
-/home/wwt/chat_room/chat/chat_servlet.cpp
-chat_servlet.h
-/home/wwt/chat_room/chat/chat_servlet.h
+/home/wwt/chat_room/chat/servlets/file_upload_servlet.cpp
+file_upload_servlet.h
+/home/wwt/chat_room/chat/servlets/file_upload_servlet.h
 log.h
-/home/wwt/chat_room/chat/log.h
-chat_message.h
-/home/wwt/chat_room/chat/chat_message.h
-util.h
-/home/wwt/chat_room/chat/util.h
+/home/wwt/chat_room/chat/servlets/log.h
+fstream
+-
 
-/home/wwt/chat_room/chat/chat_servlet.h
-ws_servlet.h
-/home/wwt/chat_room/chat/ws_servlet.h
-chat_message.h
-/home/wwt/chat_room/chat/chat_message.h
-singleton.h
-/home/wwt/chat_room/chat/singleton.h
+/home/wwt/chat_room/chat/servlets/file_upload_servlet.h
+http_servlet.h
+/home/wwt/chat_room/chat/servlets/http_servlet.h
 

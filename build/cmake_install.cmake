@@ -40,6 +40,7 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/wwt/chat_room/build/WebServer/cmake_install.cmake")
+  include("/home/wwt/chat_room/build/orm_out/cmake_install.cmake")
 
 endif()
 

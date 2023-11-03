@@ -14,6 +14,9 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../WebServer/include/http"
   "../WebServer/include/stream"
   "../WebServer/include/util"
+  "../WebServer/include/db"
+  "../WebServer/include/orm"
+  "../WebServer/include/email"
   )
 
 # Targets to which this target links.

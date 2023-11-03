@@ -2,3 +2,90 @@
 2023-10-07 13:06:34	39257	UNKOWN	0	[DEBUG]	[root]	src/main.cpp:16	run
 2023-10-10 05:42:05	26329	UNKOWN	0	[DEBUG]	[root]	src/main.cpp:16	run
 2023-10-10 05:45:16	26568	UNKOWN	0	[DEBUG]	[root]	src/main.cpp:16	run
+2023-10-24 09:01:06	35726	io_3	17	[INFO]	[root]	chat/servlets/user_create_servlet.cpp:66	[IN9ygLDV9cmrsqyk]
+2023-10-24 09:01:07	35726	io_3	17	[INFO]	[root]	chat/servlets/user_create_servlet.cpp:111	{"account":"wwt_123","code":"IN9ygLDV9cmrsqyk","create_time":"2023-10-24 09:01:06","email":"1263753461@qq.com","id":"1","is_deleted":0,"login_time":"1970-01-01 00:00:00","name":"wwt_123","passwd":"123456","role":0,"state":1,"update_time":"2023-10-24 09:01:06"}
+
+2023-10-24 13:33:06	36853	io_1	7482	[INFO]	[root]	chat/servlets/user_create_servlet.cpp:66	[djCCRZMM01iku9Sq]
+2023-10-24 13:34:52	36854	io_2	7483	[INFO]	[root]	chat/servlets/user_create_servlet.cpp:66	[4DNTyk9K2uh146Yf]
+2023-10-24 13:37:42	36854	io_2	7615	[INFO]	[root]	chat/servlets/user_create_servlet.cpp:66	[qySfxC2xDkS6tKwv]
+2023-10-24 13:39:35	40874	io_1	16	[INFO]	[root]	chat/servlets/user_create_servlet.cpp:66	[TWr43HjqtEHuwBX7]
+2023-10-24 13:39:37	40874	io_1	16	[INFO]	[root]	chat/servlets/user_create_servlet.cpp:111	{"account":"ly_123","code":"TWr43HjqtEHuwBX7","create_time":"2023-10-24 13:39:35","email":"2211636654@qq.com","id":"2","is_deleted":0,"login_time":"1970-01-01 00:00:00","name":"ly_123","passwd":"123456","role":0,"state":1,"update_time":"2023-10-24 13:39:35"}
+
+2023-10-26 13:30:31	109616	io_0	19	[ERROR]	[root]	src/iomanager.cpp:183	ASSERTION: event_ctx.fiber->getState() == Fiber::EXEC
+fiber state=1
+backtrace:
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar9IOManager8addEventEiNS0_5EventESt8functionIFvvEE+0x1305) [0x7f993478ea25]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(recv+0x306) [0x7f993479bb36]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar4http11HttpSession15recvHttpRequestEv+0x107) [0x7f99347c4b07]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar4http10HttpServer12handleClientESt10shared_ptrINS_6SocketEE+0x32f) [0x7f99347c593f]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZNSt17_Function_handlerIFvvESt5_BindIFSt7_Mem_fnIMN5sylar9TcpServerEFvSt10shared_ptrINS3_6SocketEEEES5_IS4_ES7_EEE9_M_invokeERKSt9_Any_data+0x50) [0x7f99347dcad0]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar5Fiber8MainFuncEv+0x41) [0x7f993477ee71]
+    /lib64/libc.so.6(+0x48010) [0x7f9932859010]
+
+2023-11-02 13:43:53	22885	io_2	0	[ERROR]	[root]	src/scheduler.cpp:182	ASSERTION: temp == Fiber::INIT || temp == Fiber::READY || temp == Fiber::HOLD
+backtrace:
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar9Scheduler3runEv+0x19ff) [0x7f02af4b986f]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar6Thread3runEPv+0x121) [0x7f02af4a9de1]
+    /lib64/libpthread.so.0(+0x7dd5) [0x7f02aeac0dd5]
+    /lib64/libc.so.6(clone+0x6d) [0x7f02ad63fead]
+
+2023-11-02 13:48:08	29829	io_1	16	[ERROR]	[root]	src/iomanager.cpp:183	ASSERTION: event_ctx.fiber->getState() == Fiber::EXEC
+fiber state=1
+backtrace:
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar9IOManager8addEventEiNS0_5EventESt8functionIFvvEE+0x1305) [0x7f748f638a25]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(recv+0x306) [0x7f748f645b36]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar6Stream11readFixSizeEPvm+0x73) [0x7f748f687b13]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar4http11HttpSession15recvHttpRequestEv+0x435) [0x7f748f66ee35]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar4http10HttpServer12handleClientESt10shared_ptrINS_6SocketEE+0x32f) [0x7f748f66f93f]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZNSt17_Function_handlerIFvvESt5_BindIFSt7_Mem_fnIMN5sylar9TcpServerEFvSt10shared_ptrINS3_6SocketEEEES5_IS4_ES7_EEE9_M_invokeERKSt9_Any_data+0x50) [0x7f748f686ad0]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar5Fiber8MainFuncEv+0x41) [0x7f748f628e71]
+    /lib64/libc.so.6(+0x48010) [0x7f748d703010]
+
+2023-11-02 13:50:26	30119	io_0	16	[ERROR]	[root]	src/iomanager.cpp:183	ASSERTION: event_ctx.fiber->getState() == Fiber::EXEC
+fiber state=1
+backtrace:
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar9IOManager8addEventEiNS0_5EventESt8functionIFvvEE+0x1305) [0x7f82c6ff6a25]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(recv+0x306) [0x7f82c7003b36]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar6Stream11readFixSizeEPvm+0x73) [0x7f82c7045b13]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar4http11HttpSession15recvHttpRequestEv+0x435) [0x7f82c702ce35]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar4http10HttpServer12handleClientESt10shared_ptrINS_6SocketEE+0x32f) [0x7f82c702d93f]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZNSt17_Function_handlerIFvvESt5_BindIFSt7_Mem_fnIMN5sylar9TcpServerEFvSt10shared_ptrINS3_6SocketEEEES5_IS4_ES7_EEE9_M_invokeERKSt9_Any_data+0x50) [0x7f82c7044ad0]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar5Fiber8MainFuncEv+0x41) [0x7f82c6fe6e71]
+    /lib64/libc.so.6(+0x48010) [0x7f82c50c1010]
+
+2023-11-02 13:54:23	30508	io_3	16	[ERROR]	[root]	src/iomanager.cpp:183	ASSERTION: event_ctx.fiber->getState() == Fiber::EXEC
+fiber state=1
+backtrace:
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar9IOManager8addEventEiNS0_5EventESt8functionIFvvEE+0x1305) [0x7ffff7b1aa25]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(recv+0x306) [0x7ffff7b27b36]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar6Stream11readFixSizeEPvm+0x73) [0x7ffff7b69b13]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar4http11HttpSession15recvHttpRequestEv+0x435) [0x7ffff7b50e35]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar4http10HttpServer12handleClientESt10shared_ptrINS_6SocketEE+0x32f) [0x7ffff7b5193f]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZNSt17_Function_handlerIFvvESt5_BindIFSt7_Mem_fnIMN5sylar9TcpServerEFvSt10shared_ptrINS3_6SocketEEEES5_IS4_ES7_EEE9_M_invokeERKSt9_Any_data+0x50) [0x7ffff7b68ad0]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar5Fiber8MainFuncEv+0x41) [0x7ffff7b0ae71]
+    /lib64/libc.so.6(+0x48010) [0x7ffff5be5010]
+
+2023-11-02 14:20:38	31117	io_2	510	[ERROR]	[root]	src/iomanager.cpp:183	ASSERTION: event_ctx.fiber->getState() == Fiber::EXEC
+fiber state=1
+backtrace:
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar9IOManager8addEventEiNS0_5EventESt8functionIFvvEE+0x1305) [0x7febfb848a25]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(recv+0x306) [0x7febfb855b36]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar6Stream11readFixSizeEPvm+0x73) [0x7febfb897b13]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar4http11HttpSession15recvHttpRequestEv+0x435) [0x7febfb87ee35]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar4http10HttpServer12handleClientESt10shared_ptrINS_6SocketEE+0x32f) [0x7febfb87f93f]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZNSt17_Function_handlerIFvvESt5_BindIFSt7_Mem_fnIMN5sylar9TcpServerEFvSt10shared_ptrINS3_6SocketEEEES5_IS4_ES7_EEE9_M_invokeERKSt9_Any_data+0x50) [0x7febfb896ad0]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar5Fiber8MainFuncEv+0x41) [0x7febfb838e71]
+    /lib64/libc.so.6(+0x48010) [0x7febf9913010]
+
+2023-11-02 14:46:22	32342	io_1	665	[ERROR]	[root]	src/iomanager.cpp:183	ASSERTION: event_ctx.fiber->getState() == Fiber::EXEC
+fiber state=1
+backtrace:
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar9IOManager8addEventEiNS0_5EventESt8functionIFvvEE+0x1305) [0x7ff95a9f0a25]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(recv+0x306) [0x7ff95a9fdb36]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar6Stream11readFixSizeEPvm+0x73) [0x7ff95aa3fb13]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar4http11HttpSession15recvHttpRequestEv+0x435) [0x7ff95aa26e35]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar4http10HttpServer12handleClientESt10shared_ptrINS_6SocketEE+0x32f) [0x7ff95aa2793f]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZNSt17_Function_handlerIFvvESt5_BindIFSt7_Mem_fnIMN5sylar9TcpServerEFvSt10shared_ptrINS3_6SocketEEEES5_IS4_ES7_EEE9_M_invokeERKSt9_Any_data+0x50) [0x7ff95aa3ead0]
+    /home/wwt/chat_room/WebServer/lib/libsylar.so(_ZN5sylar5Fiber8MainFuncEv+0x41) [0x7ff95a9e0e71]
+    /lib64/libc.so.6(+0x48010) [0x7ff958abb010]
+

@@ -78,6 +78,20 @@ uint64_t GetCurrentUS() {
     return tv.tv_sec * 1000 * 1000ul + tv.tv_usec;
 }
 
+// 将字符串name转换为大写字母
+std::string ToUpper(const std::string& name) {
+    std::string rt = name;
+    std::transform(rt.begin(), rt.end(), rt.begin(), ::toupper);
+    return rt;
+}
+
+// 将字符串name转换为小写字母
+std::string ToLower(const std::string& name) {
+    std::string rt = name;
+    std::transform(rt.begin(), rt.end(), rt.begin(), ::tolower);
+    return rt;
+}
+
 // 将时间戳形式的time按format格式转化成可读性字符串time
 std::string TimeToStr(time_t time, const std::string& format) {
     struct tm tm;
@@ -250,6 +264,224 @@ bool FilesUtil::Mkdir(const std::string& dirname) {
     }
     free(path);
     return true;
+}
+
+// 提取路径名
+std::string FilesUtil::Dirname(const std::string& filename) {
+    if(filename.empty()) {
+        return ".";
+    }
+    auto pos = filename.rfind('/');
+    if(pos == 0) {
+        return "/";
+    } else if(pos == std::string::npos) {
+        return ".";
+    } else {
+        return filename.substr(0, pos);
+    }
+}
+
+// 提取文件名
+std::string FilesUtil::Basename(const std::string& filename) {
+    if(filename.empty()) {
+        return filename;
+    }
+    auto pos = filename.rfind('/');
+    if(pos == std::string::npos) {
+        return filename;
+    } else {
+        return filename.substr(pos + 1);
+    }
+}
+
+
+// string[0] --> ASCII
+int8_t  TypeUtil::ToChar(const std::string& str) {
+    if(str.empty()) {
+        return 0;
+    }
+    return *str.begin();
+}
+
+// string --> int64_t
+int64_t TypeUtil::Atoi(const std::string& str) {
+    if(str.empty()) {
+        return 0;
+    }
+    return strtoull(str.c_str(), nullptr, 10);  // 十进制
+}
+
+// string --> double
+double TypeUtil::Atof(const std::string& str) {
+    if(str.empty()) {
+        return 0;
+    }
+    return atof(str.c_str());
+}
+
+// char[0] --> ASCII
+int8_t TypeUtil::ToChar(const char* str) {
+    if(str == nullptr) {
+        return 0;
+    }
+    return str[0];
+}
+
+// char* --> int64_t
+int64_t TypeUtil::Atoi(const char* str) {
+    if(str == nullptr) {
+        return 0;
+    }
+    return strtoull(str, nullptr, 10);  // 十进制
+}
+
+// char* --> double
+double  TypeUtil::Atof(const char* str) {
+    if(str == nullptr) {
+        return 0;
+    }
+    return atof(str);
+}
+
+
+static const char uri_chars[256] = {
+    /* 0 */
+    0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 1, 1, 0,
+    1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 0, 0, 0, 1, 0, 0,
+    /* 64 */
+    0, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 0, 0, 0, 0, 1,
+    0, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 0, 0, 0, 1, 0,
+    /* 128 */
+    0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+    /* 192 */
+    0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+};
+
+static const char xdigit_chars[256] = {
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,1,2,3,4,5,6,7,8,9,0,0,0,0,0,0,
+    0,10,11,12,13,14,15,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,10,11,12,13,14,15,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+};
+
+#define CHAR_IS_UNRESERVED(c)           \
+    (uri_chars[(unsigned char)(c)])
+
+// Http请求时，若请求query中包含中文，需要中文编码为 %+16进制+16进制 形式
+//-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz~
+std::string StringUtil::UrlEncode(const std::string& str, bool space_as_plus) {
+    static const char *hexdigits = "0123456789ABCDEF";
+    std::string* ss = nullptr;
+    const char* end = str.c_str() + str.length();
+    for(const char* c = str.c_str() ; c < end; ++c) {
+        if(!CHAR_IS_UNRESERVED(*c)) {
+            if(!ss) {
+                ss = new std::string;
+                ss->reserve(str.size() * 1.2);
+                ss->append(str.c_str(), c - str.c_str());
+            }
+            if(*c == ' ' && space_as_plus) {
+                ss->append(1, '+');
+            } else {
+                ss->append(1, '%');
+                ss->append(1, hexdigits[(uint8_t)*c >> 4]);
+                ss->append(1, hexdigits[*c & 0xf]);
+            }
+        } else if(ss) {
+            ss->append(1, *c);
+        }
+    }
+    if(!ss) {
+        return str;
+    } else {
+        std::string rt = *ss;
+        delete ss;
+        return rt;
+    }
+}
+
+// 中文解码
+std::string StringUtil::UrlDecode(const std::string& str, bool space_as_plus) {
+    std::string* ss = nullptr;
+    const char* end = str.c_str() + str.length();
+    for(const char* c = str.c_str(); c < end; ++c) {
+        if(*c == '+' && space_as_plus) {
+            if(!ss) {
+                ss = new std::string;
+                ss->append(str.c_str(), c - str.c_str());
+            }
+            ss->append(1, ' ');
+        } else if(*c == '%' && (c + 2) < end
+                    && isxdigit(*(c + 1)) && isxdigit(*(c + 2))){
+            if(!ss) {
+                ss = new std::string;
+                ss->append(str.c_str(), c - str.c_str());
+            }
+            ss->append(1, (char)(xdigit_chars[(int)*(c + 1)] << 4 | xdigit_chars[(int)*(c + 2)]));
+            c += 2;
+        } else if(ss) {
+            ss->append(1, *c);
+        }
+    }
+    if(!ss) {
+        return str;
+    } else {
+        std::string rt = *ss;
+        delete ss;
+        return rt;
+    }
+}
+
+// 去除字符串str两端指定的字符delimit
+std::string StringUtil::Trim(const std::string& str, const std::string& delimit) {
+    // 找字符串str中第一个不属于delimit字符集合的字符位置
+    auto begin = str.find_first_not_of(delimit);
+    if(begin == std::string::npos) {
+        return "";
+    }
+    // 找字符串str中最后一个不属于delimit字符集合的字符位置
+    auto end = str.find_last_not_of(delimit);
+    return str.substr(begin, end - begin + 1);
+}
+
+// 去除字符串str左端指定的字符delimit
+std::string StringUtil::TrimLeft(const std::string& str, const std::string& delimit) {
+    auto begin = str.find_first_not_of(delimit);
+    if(begin == std::string::npos) {
+        return "";
+    }
+    return str.substr(begin);
+}
+
+// 去除字符串str右端指定的字符delimit
+std::string StringUtil::TrimRight(const std::string& str, const std::string& delimit) {
+    auto end = str.find_last_not_of(delimit);
+    if(end == std::string::npos) {
+        return "";
+    }
+    return str.substr(0, end);
 }
 
 }

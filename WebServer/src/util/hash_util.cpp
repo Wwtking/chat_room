@@ -1,6 +1,7 @@
 #include "hash_util.h"
 #include <string.h>
 #include <openssl/sha.h>
+#include <openssl/md5.h>
 
 
 namespace sylar {
@@ -151,6 +152,28 @@ std::string base64decode(const std::string &src) {
     return result;
 }
 
+std::string md5(const std::string &data) {
+    return hexstring_from_data(md5sum(data).c_str(), MD5_DIGEST_LENGTH);
+}
+
+std::string sha1(const std::string &data) {
+    return hexstring_from_data(sha1sum(data).c_str(), SHA_DIGEST_LENGTH);
+}
+
+std::string md5sum(const void *data, size_t len) {
+    MD5_CTX ctx;
+    MD5_Init(&ctx);
+    MD5_Update(&ctx, data, len);
+    std::string result;
+    result.resize(MD5_DIGEST_LENGTH);
+    MD5_Final((unsigned char*)&result[0], &ctx);
+    return result;
+}
+
+std::string md5sum(const std::string &data) {
+    return md5sum(data.c_str(), data.size());
+}
+
 // SHA-1是一种哈希算法，用于将数据压缩并创建唯一的数字指纹
 // SHA-1生成一个160位的散列值，通常以40个十六进制数字的形式表示
 std::string sha1sum(const void *data, size_t len) {
@@ -167,6 +190,35 @@ std::string sha1sum(const std::string &data) {
     return sha1sum(data.c_str(), data.size());
 }
 
+// 将二进制数据转换为十六进制字符串的函数
+void hexstring_from_data(const void *data, size_t len, char *output) {
+    const unsigned char *buf = (const unsigned char *)data;
+    size_t i, j;
+    for (i = j = 0; i < len; ++i) {
+        char c;
+        c = (buf[i] >> 4) & 0xf;
+        c = (c > 9) ? c + 'a' - 10 : c + '0';
+        output[j++] = c;
+        c = (buf[i] & 0xf);
+        c = (c > 9) ? c + 'a' - 10 : c + '0';
+        output[j++] = c;
+    }
+}
+
+std::string hexstring_from_data(const void *data, size_t len) {
+    if (len == 0) {
+        return std::string();
+    }
+    std::string result;
+    result.resize(len * 2);
+    hexstring_from_data(data, len, &result[0]);
+    return result;
+}
+
+std::string hexstring_from_data(const std::string &data) {
+    return hexstring_from_data(data.c_str(), data.size());
+}
+
 std::string random_string(size_t len, const std::string& chars) {
     if(len == 0 || chars.empty()) {
         return "";
@@ -178,6 +230,79 @@ std::string random_string(size_t len, const std::string& chars) {
         rt[i] = chars[rand() % count];
     }
     return rt;
+}
+
+// 将字符串str1中的字符find替换为replaceWith
+std::string replace(const std::string &str1, char find, char replaceWith) {
+    auto str = str1;
+    size_t index = str.find(find);
+    while (index != std::string::npos) {
+        str[index] = replaceWith;
+        index = str.find(find, index + 1);
+    }
+    return str;
+}
+
+// 将字符串str1中的字符find替换为replaceWith
+std::string replace(const std::string &str1, char find, const std::string &replaceWith) {
+    auto str = str1;
+    size_t index = str.find(find);
+    while (index != std::string::npos) {
+        str = str.substr(0, index) + replaceWith + str.substr(index + 1);
+        index = str.find(find, index + replaceWith.size());
+    }
+    return str;
+}
+
+// 将字符串str1中的子串find替换为replaceWith
+std::string replace(const std::string &str1, const std::string &find, const std::string &replaceWith) {
+    auto str = str1;
+    size_t index = str.find(find);
+    while (index != std::string::npos) {
+        str = str.substr(0, index) + replaceWith + str.substr(index + find.size());
+        index = str.find(find, index + replaceWith.size());
+    }
+    return str;
+}
+
+// 将字符串str按照字符delim分隔，将分割结果返回，最多分割max个
+std::vector<std::string> split(const std::string &str, char delim, size_t max) {
+    std::vector<std::string> result;
+    if (str.empty()) {
+        return result;
+    }
+
+    size_t last = 0;
+    size_t pos = str.find(delim);
+    while (pos != std::string::npos) {
+        result.push_back(str.substr(last, pos - last));
+        last = pos + 1;
+        if (--max == 1)
+            break;
+        pos = str.find(delim, last);
+    }
+    result.push_back(str.substr(last));
+    return result;
+}
+
+// 将字符串str按照字符串delim分隔，将分割结果返回，最多分割max个
+std::vector<std::string> split(const std::string &str, const char *delims, size_t max) {
+    std::vector<std::string> result;
+    if (str.empty()) {
+        return result;
+    }
+
+    size_t last = 0;
+    size_t pos = str.find_first_of(delims);
+    while (pos != std::string::npos) {
+        result.push_back(str.substr(last, pos - last));
+        last = pos + 1;
+        if (--max == 1)
+            break;
+        pos = str.find_first_of(delims, last);
+    }
+    result.push_back(str.substr(last));
+    return result;
 }
 
 }

@@ -9,6 +9,9 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/wwt/chat_room/WebServer/src/bytearray.cpp" "/home/wwt/chat_room/WebServer/build/CMakeFiles/sylar.dir/src/bytearray.cpp.o"
   "/home/wwt/chat_room/WebServer/src/config.cpp" "/home/wwt/chat_room/WebServer/build/CMakeFiles/sylar.dir/src/config.cpp.o"
   "/home/wwt/chat_room/WebServer/src/daemon.cpp" "/home/wwt/chat_room/WebServer/build/CMakeFiles/sylar.dir/src/daemon.cpp.o"
+  "/home/wwt/chat_room/WebServer/src/db/mysqlite3.cpp" "/home/wwt/chat_room/WebServer/build/CMakeFiles/sylar.dir/src/db/mysqlite3.cpp.o"
+  "/home/wwt/chat_room/WebServer/src/email/email.cpp" "/home/wwt/chat_room/WebServer/build/CMakeFiles/sylar.dir/src/email/email.cpp.o"
+  "/home/wwt/chat_room/WebServer/src/email/smtp.cpp" "/home/wwt/chat_room/WebServer/build/CMakeFiles/sylar.dir/src/email/smtp.cpp.o"
   "/home/wwt/chat_room/WebServer/src/env.cpp" "/home/wwt/chat_room/WebServer/build/CMakeFiles/sylar.dir/src/env.cpp.o"
   "/home/wwt/chat_room/WebServer/src/fd_manager.cpp" "/home/wwt/chat_room/WebServer/build/CMakeFiles/sylar.dir/src/fd_manager.cpp.o"
   "/home/wwt/chat_room/WebServer/src/fiber.cpp" "/home/wwt/chat_room/WebServer/build/CMakeFiles/sylar.dir/src/fiber.cpp.o"
@@ -21,6 +24,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/wwt/chat_room/WebServer/src/http/http_session.cpp" "/home/wwt/chat_room/WebServer/build/CMakeFiles/sylar.dir/src/http/http_session.cpp.o"
   "/home/wwt/chat_room/WebServer/src/http/httpclient_parser.rl.cpp" "/home/wwt/chat_room/WebServer/build/CMakeFiles/sylar.dir/src/http/httpclient_parser.rl.cpp.o"
   "/home/wwt/chat_room/WebServer/src/http/httpserver_parser.rl.cpp" "/home/wwt/chat_room/WebServer/build/CMakeFiles/sylar.dir/src/http/httpserver_parser.rl.cpp.o"
+  "/home/wwt/chat_room/WebServer/src/http/session_data.cpp" "/home/wwt/chat_room/WebServer/build/CMakeFiles/sylar.dir/src/http/session_data.cpp.o"
   "/home/wwt/chat_room/WebServer/src/http/ws_connection.cpp" "/home/wwt/chat_room/WebServer/build/CMakeFiles/sylar.dir/src/http/ws_connection.cpp.o"
   "/home/wwt/chat_room/WebServer/src/http/ws_server.cpp" "/home/wwt/chat_room/WebServer/build/CMakeFiles/sylar.dir/src/http/ws_server.cpp.o"
   "/home/wwt/chat_room/WebServer/src/http/ws_servlet.cpp" "/home/wwt/chat_room/WebServer/build/CMakeFiles/sylar.dir/src/http/ws_servlet.cpp.o"
@@ -55,6 +59,9 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../include/http"
   "../include/stream"
   "../include/util"
+  "../include/db"
+  "../include/orm"
+  "../include/email"
   )
 
 # Targets to which this target links.

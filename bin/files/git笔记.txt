@@ -1,0 +1,20 @@
+新建仓库，第一次git步骤：
+
+git init				// 在当前目录创建.git
+git add ./				// 把所有文件都提交暂存区
+git status				// 查看暂存区内容
+git commit -m "备注"		// 将暂存区内容添加到本地仓库中
+git remote add origin xxx.git		// 关联远程仓库，此时本地仓库和远程仓库就连接起来
+// origin是自己给远程仓库起的名字，也可以叫其它的，一般默认叫origin，xxx.git是GitHub复制的SSH连接
+// 例如你git clone xxx.git  则会克隆一份github上的代码至本地，这时本地仓库和远程仓库建立连接，git为你默认创建了一个指向远端代码库的标识origin
+
+git pull origin master		// 先把远程仓库上的东西拉到本地，因为可能有readme文件
+git commit -m "备注"		// 这步看情况，可能拉下来的东西还没提交，需要看一下git status，看文件是否还在暂存区，如果还在则commit放到本地仓库
+git push origin master		// 将本地仓库代码放到远程仓库中
+
+
+后续修改代码，更新远程仓库：
+git commit -m "备注"		// 将修改的代码提交本地仓库
+git pull origin master		// 先把远程仓库拉下来，因为远程仓库代码可能有别人更新
+git push origin master		// 再将本次修改的代码提交
+// 不需要重新关联远程仓库，同一个目录下同一个远程仓库只要关联一次就行

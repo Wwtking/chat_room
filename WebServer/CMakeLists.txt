@@ -13,8 +13,11 @@ include_directories(include)
 include_directories(include/http)
 include_directories(include/stream)
 include_directories(include/util)
+include_directories(include/db)
+include_directories(include/orm)
+include_directories(include/email)
 # 向工程添加多个特定的库文件搜索路径(静态库.a和动态库.so)
-link_directories(/home/wwt/sylar/lib)  #用绝对路径
+link_directories(/home/wwt/chat_room/WebServer/lib)  #用绝对路径
 
 # BUILD_TEST 选项将使用默认值 OFF
 # cmake .. 时，BUILD_TEST=OFF
@@ -36,6 +39,7 @@ set(SRC src/log.cpp
         src/util/hash_util.cpp 
         src/util/json_util.cpp 
         src/config.cpp 
+        src/db/mysqlite3.cpp
         src/thread.cpp
         src/fiber.cpp
         src/scheduler.cpp
@@ -56,6 +60,7 @@ set(SRC src/log.cpp
         src/http/ws_session.cpp
         src/http/ws_server.cpp
         src/http/ws_servlet.cpp
+        src/http/session_data.cpp
         src/tcp_server.cpp
         src/stream/stream.cpp
         src/stream/socket_stream.cpp
@@ -64,7 +69,9 @@ set(SRC src/log.cpp
         src/application.cpp
         src/module.cpp
         src/library.cpp
-        src/worker.cpp)
+        src/worker.cpp
+        src/email/email.cpp
+        src/email/smtp.cpp)
 
 ragelmaker(src/http/httpserver_parser.rl SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/http)
 ragelmaker(src/http/httpclient_parser.rl SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/http)
@@ -78,7 +85,9 @@ set(LIB sylar
         yaml-cpp
         jsoncpp
         pthread
-        ${OPENSSL_LIBRARIES})
+        ${OPENSSL_LIBRARIES}
+        sqlite3
+        tinyxml2)
 
 if(BUILD_TEST)
 
@@ -108,6 +117,17 @@ sylar_add_executable(ws_server_test tests/ws_server_test.cpp sylar "${LIB}")
 sylar_add_executable(ws_client_test tests/ws_client_test.cpp sylar "${LIB}")
 
 endif()
+
+sylar_add_executable(sqlite3_test tests/sqlite3_test.cpp sylar "${LIB}")
+sylar_add_executable(email_test tests/email_test.cpp sylar "${LIB}")
+
+set(ORM_SRC src/orm/tinyxml2.cpp
+            src/orm/table.cpp
+            src/orm/column.cpp
+            src/orm/index.cpp
+            src/orm/orm.cpp
+            src/orm/orm_util.cpp)
+sylar_add_executable(orm "${ORM_SRC}" sylar "${LIB}")
 
 sylar_add_executable(bin_sylar src/main.cpp sylar "${LIB}")
 # 将 bin_sylar 目标的输出名称设置为 sylar

@@ -317,19 +317,19 @@ public:
      * @brief 根据key值获取HTTP请求头部的value值
      * @return 若存在返回value值，若不存在返回默认值def
     */
-    const std::string& getHeader(const std::string& key, const std::string& def = "") const;
+    const std::string& getHeader(const std::string& key, const std::string& def = "");
 
     /**
      * @brief 根据key值获取HTTP请求参数的value值
      * @return 若存在返回value值，若不存在返回默认值def
     */
-    const std::string& getParam(const std::string& key, const std::string& def = "") const;
+    const std::string& getParam(const std::string& key, const std::string& def = "");
 
     /**
      * @brief 根据key值获取HTTP请求Cookie的value值
      * @return 若存在返回value值，若不存在返回默认值def
     */
-    const std::string& getCookie(const std::string& key, const std::string& def = "") const;
+    const std::string& getCookie(const std::string& key, const std::string& def = "");
 
     /**
      * @brief 根据key值设置HTTP请求头部的value值
@@ -367,7 +367,7 @@ public:
      * @param[out] value 如果头部参数存在,value非空则赋值
      * @return 返回是否存在
     */
-    bool hasHeader(const std::string& key, std::string* value = nullptr) const;
+    bool hasHeader(const std::string& key, std::string* value = nullptr);
 
     /**
      * @brief 判断HTTP请求的请求参数是否存在
@@ -375,7 +375,7 @@ public:
      * @param[out] value 如果头部参数存在,value非空则赋值
      * @return 返回是否存在
     */
-    bool hasParam(const std::string& key, std::string* value = nullptr) const;
+    bool hasParam(const std::string& key, std::string* value = nullptr);
 
     /**
      * @brief 判断HTTP请求的Cookie参数是否存在
@@ -383,7 +383,7 @@ public:
      * @param[out] value 如果头部参数存在,value非空则赋值
      * @return 返回是否存在
     */
-    bool hasCookie(const std::string& key, std::string* value = nullptr) const;
+    bool hasCookie(const std::string& key, std::string* value = nullptr);
 
     /**
      * @brief 获取HTTP请求头部的value，并转换为T类型值
@@ -417,6 +417,8 @@ public:
     */
     template<class T>
     T getParamValue(const std::string& key, T def = T()) {
+        initQueryParam();
+        initBodyParam();
         return GetMapValue<MapType, T>(m_params, key, def);
     }
 
@@ -430,6 +432,8 @@ public:
     */
     template<class T>
     bool checkGetParamValue(const std::string& key, T& value, T def = T()) {
+        initQueryParam();
+        initBodyParam();
         return CheckGetMapValue<MapType, T>(m_params, key, value, def);
     }
 
@@ -441,6 +445,7 @@ public:
     */
     template<class T>
     T getCookieValue(const std::string& key, T def = T()) {
+        initCookies();
         return GetMapValue<MapType, T>(m_cookies, key, def);
     }
 
@@ -454,6 +459,7 @@ public:
     */
     template<class T>
     bool checkGetCookieValue(const std::string& key, T& value, T def = T()) {
+        initCookies();
         return CheckGetMapValue<MapType, T>(m_cookies, key, value, def);
     }
 
@@ -462,6 +468,11 @@ public:
 
     // 字符串方式输出HTTP请求所有信息
     std::string toString() const;
+
+    void initParam();
+    void initQueryParam();
+    void initBodyParam();
+    void initCookies();
 
 private:
     HttpMethod m_method;        // HTTP请求方法
@@ -475,6 +486,10 @@ private:
     MapType m_headers;          // 请求头部 map
     MapType m_params;           // 请求参数 map
     MapType m_cookies;          // 请求Cookie map
+    /// 0x001 解析query
+    /// 0x010 解析body
+    /// 0x100 解析cookie
+    uint8_t m_parserParamFlag;
 
     /**
      * @brief URL:http://www.aspxfans.com:8080/news/index.asp?boardID=5&ID=24618&page=1#name
@@ -617,6 +632,19 @@ public:
 
     // 字符串方式输出HTTP请求所有信息
     std::string toString();
+
+    /**
+     * @brief 设置 HTTP 响应中的 Cookie
+     * @param[in] key Cookie的键名
+     * @param[in] val Cookie的键值。
+     * @param[in] expired Cookie的过期时间
+     * @param[in] path Cookie的路径
+     * @param[in] domain Cookie的域名
+     * @param[in] secure 指示是否只在安全连接下传输Cookie
+    */
+    void setCookie(const std::string& key, const std::string& val,
+                   time_t expired = 0, const std::string& path = "",
+                   const std::string& domain = "", bool secure = false);
 
 private:
     HttpStatus m_status;                // HTTP响应状态

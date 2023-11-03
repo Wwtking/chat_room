@@ -127,6 +127,45 @@ bin_sylar/fast:
 .PHONY : bin_sylar/fast
 
 #=============================================================================
+# Target rules for targets named orm
+
+# Build rule for target.
+orm: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 orm
+.PHONY : orm
+
+# fast build rule for target.
+orm/fast:
+	$(MAKE) -f CMakeFiles/orm.dir/build.make CMakeFiles/orm.dir/build
+.PHONY : orm/fast
+
+#=============================================================================
+# Target rules for targets named email_test
+
+# Build rule for target.
+email_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 email_test
+.PHONY : email_test
+
+# fast build rule for target.
+email_test/fast:
+	$(MAKE) -f CMakeFiles/email_test.dir/build.make CMakeFiles/email_test.dir/build
+.PHONY : email_test/fast
+
+#=============================================================================
+# Target rules for targets named sqlite3_test
+
+# Build rule for target.
+sqlite3_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 sqlite3_test
+.PHONY : sqlite3_test
+
+# fast build rule for target.
+sqlite3_test/fast:
+	$(MAKE) -f CMakeFiles/sqlite3_test.dir/build.make CMakeFiles/sqlite3_test.dir/build
+.PHONY : sqlite3_test/fast
+
+#=============================================================================
 # Target rules for targets named sylar
 
 # Build rule for target.
@@ -273,6 +312,87 @@ src/daemon.s: src/daemon.cpp.s
 src/daemon.cpp.s:
 	$(MAKE) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/src/daemon.cpp.s
 .PHONY : src/daemon.cpp.s
+
+src/db/mysqlite3.o: src/db/mysqlite3.cpp.o
+
+.PHONY : src/db/mysqlite3.o
+
+# target to build an object file
+src/db/mysqlite3.cpp.o:
+	$(MAKE) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/src/db/mysqlite3.cpp.o
+.PHONY : src/db/mysqlite3.cpp.o
+
+src/db/mysqlite3.i: src/db/mysqlite3.cpp.i
+
+.PHONY : src/db/mysqlite3.i
+
+# target to preprocess a source file
+src/db/mysqlite3.cpp.i:
+	$(MAKE) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/src/db/mysqlite3.cpp.i
+.PHONY : src/db/mysqlite3.cpp.i
+
+src/db/mysqlite3.s: src/db/mysqlite3.cpp.s
+
+.PHONY : src/db/mysqlite3.s
+
+# target to generate assembly for a file
+src/db/mysqlite3.cpp.s:
+	$(MAKE) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/src/db/mysqlite3.cpp.s
+.PHONY : src/db/mysqlite3.cpp.s
+
+src/email/email.o: src/email/email.cpp.o
+
+.PHONY : src/email/email.o
+
+# target to build an object file
+src/email/email.cpp.o:
+	$(MAKE) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/src/email/email.cpp.o
+.PHONY : src/email/email.cpp.o
+
+src/email/email.i: src/email/email.cpp.i
+
+.PHONY : src/email/email.i
+
+# target to preprocess a source file
+src/email/email.cpp.i:
+	$(MAKE) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/src/email/email.cpp.i
+.PHONY : src/email/email.cpp.i
+
+src/email/email.s: src/email/email.cpp.s
+
+.PHONY : src/email/email.s
+
+# target to generate assembly for a file
+src/email/email.cpp.s:
+	$(MAKE) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/src/email/email.cpp.s
+.PHONY : src/email/email.cpp.s
+
+src/email/smtp.o: src/email/smtp.cpp.o
+
+.PHONY : src/email/smtp.o
+
+# target to build an object file
+src/email/smtp.cpp.o:
+	$(MAKE) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/src/email/smtp.cpp.o
+.PHONY : src/email/smtp.cpp.o
+
+src/email/smtp.i: src/email/smtp.cpp.i
+
+.PHONY : src/email/smtp.i
+
+# target to preprocess a source file
+src/email/smtp.cpp.i:
+	$(MAKE) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/src/email/smtp.cpp.i
+.PHONY : src/email/smtp.cpp.i
+
+src/email/smtp.s: src/email/smtp.cpp.s
+
+.PHONY : src/email/smtp.s
+
+# target to generate assembly for a file
+src/email/smtp.cpp.s:
+	$(MAKE) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/src/email/smtp.cpp.s
+.PHONY : src/email/smtp.cpp.s
 
 src/env.o: src/env.cpp.o
 
@@ -598,6 +718,33 @@ src/http/httpserver_parser.rl.cpp.s:
 	$(MAKE) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/src/http/httpserver_parser.rl.cpp.s
 .PHONY : src/http/httpserver_parser.rl.cpp.s
 
+src/http/session_data.o: src/http/session_data.cpp.o
+
+.PHONY : src/http/session_data.o
+
+# target to build an object file
+src/http/session_data.cpp.o:
+	$(MAKE) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/src/http/session_data.cpp.o
+.PHONY : src/http/session_data.cpp.o
+
+src/http/session_data.i: src/http/session_data.cpp.i
+
+.PHONY : src/http/session_data.i
+
+# target to preprocess a source file
+src/http/session_data.cpp.i:
+	$(MAKE) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/src/http/session_data.cpp.i
+.PHONY : src/http/session_data.cpp.i
+
+src/http/session_data.s: src/http/session_data.cpp.s
+
+.PHONY : src/http/session_data.s
+
+# target to generate assembly for a file
+src/http/session_data.cpp.s:
+	$(MAKE) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/src/http/session_data.cpp.s
+.PHONY : src/http/session_data.cpp.s
+
 src/http/ws_connection.o: src/http/ws_connection.cpp.o
 
 .PHONY : src/http/ws_connection.o
@@ -840,6 +987,168 @@ src/module.s: src/module.cpp.s
 src/module.cpp.s:
 	$(MAKE) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/src/module.cpp.s
 .PHONY : src/module.cpp.s
+
+src/orm/column.o: src/orm/column.cpp.o
+
+.PHONY : src/orm/column.o
+
+# target to build an object file
+src/orm/column.cpp.o:
+	$(MAKE) -f CMakeFiles/orm.dir/build.make CMakeFiles/orm.dir/src/orm/column.cpp.o
+.PHONY : src/orm/column.cpp.o
+
+src/orm/column.i: src/orm/column.cpp.i
+
+.PHONY : src/orm/column.i
+
+# target to preprocess a source file
+src/orm/column.cpp.i:
+	$(MAKE) -f CMakeFiles/orm.dir/build.make CMakeFiles/orm.dir/src/orm/column.cpp.i
+.PHONY : src/orm/column.cpp.i
+
+src/orm/column.s: src/orm/column.cpp.s
+
+.PHONY : src/orm/column.s
+
+# target to generate assembly for a file
+src/orm/column.cpp.s:
+	$(MAKE) -f CMakeFiles/orm.dir/build.make CMakeFiles/orm.dir/src/orm/column.cpp.s
+.PHONY : src/orm/column.cpp.s
+
+src/orm/index.o: src/orm/index.cpp.o
+
+.PHONY : src/orm/index.o
+
+# target to build an object file
+src/orm/index.cpp.o:
+	$(MAKE) -f CMakeFiles/orm.dir/build.make CMakeFiles/orm.dir/src/orm/index.cpp.o
+.PHONY : src/orm/index.cpp.o
+
+src/orm/index.i: src/orm/index.cpp.i
+
+.PHONY : src/orm/index.i
+
+# target to preprocess a source file
+src/orm/index.cpp.i:
+	$(MAKE) -f CMakeFiles/orm.dir/build.make CMakeFiles/orm.dir/src/orm/index.cpp.i
+.PHONY : src/orm/index.cpp.i
+
+src/orm/index.s: src/orm/index.cpp.s
+
+.PHONY : src/orm/index.s
+
+# target to generate assembly for a file
+src/orm/index.cpp.s:
+	$(MAKE) -f CMakeFiles/orm.dir/build.make CMakeFiles/orm.dir/src/orm/index.cpp.s
+.PHONY : src/orm/index.cpp.s
+
+src/orm/orm.o: src/orm/orm.cpp.o
+
+.PHONY : src/orm/orm.o
+
+# target to build an object file
+src/orm/orm.cpp.o:
+	$(MAKE) -f CMakeFiles/orm.dir/build.make CMakeFiles/orm.dir/src/orm/orm.cpp.o
+.PHONY : src/orm/orm.cpp.o
+
+src/orm/orm.i: src/orm/orm.cpp.i
+
+.PHONY : src/orm/orm.i
+
+# target to preprocess a source file
+src/orm/orm.cpp.i:
+	$(MAKE) -f CMakeFiles/orm.dir/build.make CMakeFiles/orm.dir/src/orm/orm.cpp.i
+.PHONY : src/orm/orm.cpp.i
+
+src/orm/orm.s: src/orm/orm.cpp.s
+
+.PHONY : src/orm/orm.s
+
+# target to generate assembly for a file
+src/orm/orm.cpp.s:
+	$(MAKE) -f CMakeFiles/orm.dir/build.make CMakeFiles/orm.dir/src/orm/orm.cpp.s
+.PHONY : src/orm/orm.cpp.s
+
+src/orm/orm_util.o: src/orm/orm_util.cpp.o
+
+.PHONY : src/orm/orm_util.o
+
+# target to build an object file
+src/orm/orm_util.cpp.o:
+	$(MAKE) -f CMakeFiles/orm.dir/build.make CMakeFiles/orm.dir/src/orm/orm_util.cpp.o
+.PHONY : src/orm/orm_util.cpp.o
+
+src/orm/orm_util.i: src/orm/orm_util.cpp.i
+
+.PHONY : src/orm/orm_util.i
+
+# target to preprocess a source file
+src/orm/orm_util.cpp.i:
+	$(MAKE) -f CMakeFiles/orm.dir/build.make CMakeFiles/orm.dir/src/orm/orm_util.cpp.i
+.PHONY : src/orm/orm_util.cpp.i
+
+src/orm/orm_util.s: src/orm/orm_util.cpp.s
+
+.PHONY : src/orm/orm_util.s
+
+# target to generate assembly for a file
+src/orm/orm_util.cpp.s:
+	$(MAKE) -f CMakeFiles/orm.dir/build.make CMakeFiles/orm.dir/src/orm/orm_util.cpp.s
+.PHONY : src/orm/orm_util.cpp.s
+
+src/orm/table.o: src/orm/table.cpp.o
+
+.PHONY : src/orm/table.o
+
+# target to build an object file
+src/orm/table.cpp.o:
+	$(MAKE) -f CMakeFiles/orm.dir/build.make CMakeFiles/orm.dir/src/orm/table.cpp.o
+.PHONY : src/orm/table.cpp.o
+
+src/orm/table.i: src/orm/table.cpp.i
+
+.PHONY : src/orm/table.i
+
+# target to preprocess a source file
+src/orm/table.cpp.i:
+	$(MAKE) -f CMakeFiles/orm.dir/build.make CMakeFiles/orm.dir/src/orm/table.cpp.i
+.PHONY : src/orm/table.cpp.i
+
+src/orm/table.s: src/orm/table.cpp.s
+
+.PHONY : src/orm/table.s
+
+# target to generate assembly for a file
+src/orm/table.cpp.s:
+	$(MAKE) -f CMakeFiles/orm.dir/build.make CMakeFiles/orm.dir/src/orm/table.cpp.s
+.PHONY : src/orm/table.cpp.s
+
+src/orm/tinyxml2.o: src/orm/tinyxml2.cpp.o
+
+.PHONY : src/orm/tinyxml2.o
+
+# target to build an object file
+src/orm/tinyxml2.cpp.o:
+	$(MAKE) -f CMakeFiles/orm.dir/build.make CMakeFiles/orm.dir/src/orm/tinyxml2.cpp.o
+.PHONY : src/orm/tinyxml2.cpp.o
+
+src/orm/tinyxml2.i: src/orm/tinyxml2.cpp.i
+
+.PHONY : src/orm/tinyxml2.i
+
+# target to preprocess a source file
+src/orm/tinyxml2.cpp.i:
+	$(MAKE) -f CMakeFiles/orm.dir/build.make CMakeFiles/orm.dir/src/orm/tinyxml2.cpp.i
+.PHONY : src/orm/tinyxml2.cpp.i
+
+src/orm/tinyxml2.s: src/orm/tinyxml2.cpp.s
+
+.PHONY : src/orm/tinyxml2.s
+
+# target to generate assembly for a file
+src/orm/tinyxml2.cpp.s:
+	$(MAKE) -f CMakeFiles/orm.dir/build.make CMakeFiles/orm.dir/src/orm/tinyxml2.cpp.s
+.PHONY : src/orm/tinyxml2.cpp.s
 
 src/scheduler.o: src/scheduler.cpp.o
 
@@ -1165,6 +1474,60 @@ src/worker.cpp.s:
 	$(MAKE) -f CMakeFiles/sylar.dir/build.make CMakeFiles/sylar.dir/src/worker.cpp.s
 .PHONY : src/worker.cpp.s
 
+tests/email_test.o: tests/email_test.cpp.o
+
+.PHONY : tests/email_test.o
+
+# target to build an object file
+tests/email_test.cpp.o:
+	$(MAKE) -f CMakeFiles/email_test.dir/build.make CMakeFiles/email_test.dir/tests/email_test.cpp.o
+.PHONY : tests/email_test.cpp.o
+
+tests/email_test.i: tests/email_test.cpp.i
+
+.PHONY : tests/email_test.i
+
+# target to preprocess a source file
+tests/email_test.cpp.i:
+	$(MAKE) -f CMakeFiles/email_test.dir/build.make CMakeFiles/email_test.dir/tests/email_test.cpp.i
+.PHONY : tests/email_test.cpp.i
+
+tests/email_test.s: tests/email_test.cpp.s
+
+.PHONY : tests/email_test.s
+
+# target to generate assembly for a file
+tests/email_test.cpp.s:
+	$(MAKE) -f CMakeFiles/email_test.dir/build.make CMakeFiles/email_test.dir/tests/email_test.cpp.s
+.PHONY : tests/email_test.cpp.s
+
+tests/sqlite3_test.o: tests/sqlite3_test.cpp.o
+
+.PHONY : tests/sqlite3_test.o
+
+# target to build an object file
+tests/sqlite3_test.cpp.o:
+	$(MAKE) -f CMakeFiles/sqlite3_test.dir/build.make CMakeFiles/sqlite3_test.dir/tests/sqlite3_test.cpp.o
+.PHONY : tests/sqlite3_test.cpp.o
+
+tests/sqlite3_test.i: tests/sqlite3_test.cpp.i
+
+.PHONY : tests/sqlite3_test.i
+
+# target to preprocess a source file
+tests/sqlite3_test.cpp.i:
+	$(MAKE) -f CMakeFiles/sqlite3_test.dir/build.make CMakeFiles/sqlite3_test.dir/tests/sqlite3_test.cpp.i
+.PHONY : tests/sqlite3_test.cpp.i
+
+tests/sqlite3_test.s: tests/sqlite3_test.cpp.s
+
+.PHONY : tests/sqlite3_test.s
+
+# target to generate assembly for a file
+tests/sqlite3_test.cpp.s:
+	$(MAKE) -f CMakeFiles/sqlite3_test.dir/build.make CMakeFiles/sqlite3_test.dir/tests/sqlite3_test.cpp.s
+.PHONY : tests/sqlite3_test.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -1174,6 +1537,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... bin_sylar"
+	@echo "... orm"
+	@echo "... email_test"
+	@echo "... sqlite3_test"
 	@echo "... sylar"
 	@echo "... src/address.o"
 	@echo "... src/address.i"
@@ -1190,6 +1556,15 @@ help:
 	@echo "... src/daemon.o"
 	@echo "... src/daemon.i"
 	@echo "... src/daemon.s"
+	@echo "... src/db/mysqlite3.o"
+	@echo "... src/db/mysqlite3.i"
+	@echo "... src/db/mysqlite3.s"
+	@echo "... src/email/email.o"
+	@echo "... src/email/email.i"
+	@echo "... src/email/email.s"
+	@echo "... src/email/smtp.o"
+	@echo "... src/email/smtp.i"
+	@echo "... src/email/smtp.s"
 	@echo "... src/env.o"
 	@echo "... src/env.i"
 	@echo "... src/env.s"
@@ -1226,6 +1601,9 @@ help:
 	@echo "... src/http/httpserver_parser.rl.o"
 	@echo "... src/http/httpserver_parser.rl.i"
 	@echo "... src/http/httpserver_parser.rl.s"
+	@echo "... src/http/session_data.o"
+	@echo "... src/http/session_data.i"
+	@echo "... src/http/session_data.s"
 	@echo "... src/http/ws_connection.o"
 	@echo "... src/http/ws_connection.i"
 	@echo "... src/http/ws_connection.s"
@@ -1253,6 +1631,24 @@ help:
 	@echo "... src/module.o"
 	@echo "... src/module.i"
 	@echo "... src/module.s"
+	@echo "... src/orm/column.o"
+	@echo "... src/orm/column.i"
+	@echo "... src/orm/column.s"
+	@echo "... src/orm/index.o"
+	@echo "... src/orm/index.i"
+	@echo "... src/orm/index.s"
+	@echo "... src/orm/orm.o"
+	@echo "... src/orm/orm.i"
+	@echo "... src/orm/orm.s"
+	@echo "... src/orm/orm_util.o"
+	@echo "... src/orm/orm_util.i"
+	@echo "... src/orm/orm_util.s"
+	@echo "... src/orm/table.o"
+	@echo "... src/orm/table.i"
+	@echo "... src/orm/table.s"
+	@echo "... src/orm/tinyxml2.o"
+	@echo "... src/orm/tinyxml2.i"
+	@echo "... src/orm/tinyxml2.s"
 	@echo "... src/scheduler.o"
 	@echo "... src/scheduler.i"
 	@echo "... src/scheduler.s"
@@ -1289,6 +1685,12 @@ help:
 	@echo "... src/worker.o"
 	@echo "... src/worker.i"
 	@echo "... src/worker.s"
+	@echo "... tests/email_test.o"
+	@echo "... tests/email_test.i"
+	@echo "... tests/email_test.s"
+	@echo "... tests/sqlite3_test.o"
+	@echo "... tests/sqlite3_test.i"
+	@echo "... tests/sqlite3_test.s"
 .PHONY : help
 
 

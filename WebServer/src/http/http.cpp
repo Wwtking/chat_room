@@ -1,5 +1,6 @@
 #include "http.h"
 #include "log.h"
+#include "util.h"
 #include <sstream>
 
 
@@ -96,11 +97,12 @@ HttpRequest::HttpRequest(uint8_t version, bool close)
     ,m_version(version)
     ,m_websocket(false)
     ,m_close(close)
-    ,m_path("/") {
+    ,m_path("/")
+    ,m_parserParamFlag(0) {
 }
 
 // 根据key值获取HTTP请求头部的value值
-const std::string& HttpRequest::getHeader(const std::string& key, const std::string& def) const {
+const std::string& HttpRequest::getHeader(const std::string& key, const std::string& def) {
     auto it = m_headers.find(key);
     if(it == m_headers.end()) {
         return def;
@@ -109,7 +111,9 @@ const std::string& HttpRequest::getHeader(const std::string& key, const std::str
 }
 
 // 根据key值获取HTTP请求参数的value值
-const std::string& HttpRequest::getParam(const std::string& key, const std::string& def) const {
+const std::string& HttpRequest::getParam(const std::string& key, const std::string& def) {
+    initQueryParam();
+    initBodyParam();
     auto it = m_params.find(key);
     if(it == m_params.end()) {
         return def;
@@ -118,7 +122,8 @@ const std::string& HttpRequest::getParam(const std::string& key, const std::stri
 }
 
 // 根据key值获取HTTP请求Cookie的value值
-const std::string& HttpRequest::getCookie(const std::string& key, const std::string& def) const {
+const std::string& HttpRequest::getCookie(const std::string& key, const std::string& def) {
+    initCookies();
     auto it = m_cookies.find(key);
     if(it == m_cookies.end()) {
         return def;
@@ -157,7 +162,7 @@ void HttpRequest::delCookie(const std::string& key) {
 }   
 
 // 判断HTTP请求的头部参数是否存在
-bool HttpRequest::hasHeader(const std::string& key, std::string* value) const {
+bool HttpRequest::hasHeader(const std::string& key, std::string* value) {
     auto it = m_headers.find(key);
     if(it == m_headers.end()) {
         return false;
@@ -169,7 +174,9 @@ bool HttpRequest::hasHeader(const std::string& key, std::string* value) const {
 }
 
 // 判断HTTP请求的请求参数是否存在
-bool HttpRequest::hasParam(const std::string& key, std::string* value) const {
+bool HttpRequest::hasParam(const std::string& key, std::string* value) {
+    initQueryParam();
+    initBodyParam();
     auto it = m_params.find(key);
     if(it == m_params.end()) {
         return false;
@@ -181,7 +188,8 @@ bool HttpRequest::hasParam(const std::string& key, std::string* value) const {
 }
 
 // 判断HTTP请求的Cookie参数是否存在
-bool HttpRequest::hasCookie(const std::string& key, std::string* value) const {
+bool HttpRequest::hasCookie(const std::string& key, std::string* value) {
+    initCookies();
     auto it = m_cookies.find(key);
     if(it == m_cookies.end()) {
         return false;
@@ -232,6 +240,78 @@ std::string HttpRequest::toString() const {
     dump(ss);
     return ss.str();
 }
+
+void HttpRequest::initParam() {
+    initQueryParam();
+    initBodyParam();
+    initCookies();
+}
+
+// 为了解析HTTP请求中的cookie、param各项
+// Cookie: name=hani; site=www.hani.com
+#define PARSE_PARAM(str, m, flag, trim) \
+    size_t pos = 0; \
+    do { \
+        size_t last = pos; \
+        pos = str.find('=', pos); \
+        if(pos == std::string::npos) { \
+            break; \
+        } \
+        size_t key = pos; \
+        pos = str.find(flag, pos); \
+        m.insert(std::make_pair(trim(str.substr(last, key - last)), \
+                    sylar::StringUtil::UrlDecode(str.substr(key + 1, pos - key - 1)))); \
+        if(pos == std::string::npos) { \
+            break; \
+        } \
+        ++pos; \
+    } while(true);
+
+// 解析 m_query 中的请求参数
+// GET 请求通常将参数直接放在 URL 的查询字符串中
+void HttpRequest::initQueryParam() {
+    if(m_parserParamFlag & 0x1) {
+        return;
+    }
+
+    PARSE_PARAM(m_query, m_params, '&',);
+    m_parserParamFlag |= 0x1;
+}
+
+// 当使用 content-type: application/x-www-form-urlencoded 编码时，
+// 请求参数会被转换成键值对的形式，并通过 & 符号连接起来，然后放在请求体中
+// Content-Type: application/x-www-form-urlencoded
+// /r/n
+// param1=value1&param2=value2
+void HttpRequest::initBodyParam() {
+    if(m_parserParamFlag & 0x2) {
+        return;
+    }
+    std::string content_type = getHeader("content-type");
+    // 在字符串content_type中找子串"application/x-www-form-urlencoded"
+    if(strcasestr(content_type.c_str(), "application/x-www-form-urlencoded") == nullptr) {
+        m_parserParamFlag |= 0x2;
+        return;
+    }
+    PARSE_PARAM(m_body, m_params, '&',);
+    m_parserParamFlag |= 0x2;
+}
+
+// Cookie: name=hani; site=www.hani.com
+void HttpRequest::initCookies() {
+    if(m_parserParamFlag & 0x4) {
+        return;
+    }
+    std::string cookie = getHeader("cookie");
+    if(cookie.empty()) {
+        m_parserParamFlag |= 0x4;
+        return;
+    }
+    PARSE_PARAM(cookie, m_cookies, ';', sylar::StringUtil::Trim);
+    m_parserParamFlag |= 0x4;
+}
+
+#undef PARSE_PARAM
 
 
 // 有参构造
@@ -297,6 +377,9 @@ std::ostream& HttpResponse::dump(std::ostream& os) {
         }
         os << i.first << ": " << i.second << "\r\n";
     }
+    for(auto& i : m_cookies) {
+        os << "Set-Cookie: " << i << "\r\n";
+    }
     if(!m_body.empty()) {
         if(!hasContentLen) {
             os << "Content-Length: " << m_body.size() << "\r\n";
@@ -314,6 +397,27 @@ std::string HttpResponse::toString() {
     std::stringstream ss;
     dump(ss);
     return ss.str();
+}
+
+// 设置 HTTP 响应中的 Cookie
+void HttpResponse::setCookie(const std::string& key, const std::string& val,
+                             time_t expired, const std::string& path,
+                             const std::string& domain, bool secure) {
+    std::stringstream ss;
+    ss << key << "=" << val;
+    if(expired > 0) {
+        ss << ";expires=" << sylar::TimeToStr(expired, "%a, %d %b %Y %H:%M:%S") << " GMT";
+    }
+    if(!domain.empty()) {
+        ss << ";domain=" << domain;
+    }
+    if(!path.empty()) {
+        ss << ";path=" << path;
+    }
+    if(secure) {
+        ss << ";secure";
+    }
+    m_cookies.push_back(ss.str());
 }
 
 }
