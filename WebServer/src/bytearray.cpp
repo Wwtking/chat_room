@@ -245,7 +245,7 @@ static uint64_t EncodeZigzag64(const int64_t& value) {
     }
 
     // 方法二
-    // return (value << 1) ^ (value >> 31);
+    // return (value << 1) ^ (value >> 63);
 }
 
 // 对编码后的数据进行解码，恢复原数据
@@ -309,7 +309,7 @@ void ByteArray::writeFloat(float value) {
 void ByteArray::writeDouble(double value) {
     uint64_t result;
     memcpy(&result, &value, sizeof(value));
-    writeFuint32(result);
+    writeFuint64(result);
 }
 
 // 存放字符串

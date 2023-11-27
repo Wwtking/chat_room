@@ -80,9 +80,10 @@ IOManager::IOManager(size_t threads, bool use_caller, const std::string& name)
     event.events = EPOLLIN | EPOLLET;   //设置读事件和边缘触发
     event.data.fd = m_tickleFds[0];
     
-    //非阻塞方式，配合边缘触发
+    //将m_tickleFds[0]文件描述符设置为非阻塞方式，配合边缘触发
     //epoll的ET模式下是必须使用非阻塞IO的，ET模式指的是当数据从无到有时，才通知该fd
     //数据读不完，也不会再次通知，所以read时一定要采用循环的方式一直读到read函数返回-1为止
+    //如果采用阻塞IO，循环read时，最后一次会被阻塞
     rt = fcntl(m_tickleFds[0], F_SETFL, fcntl(m_tickleFds[0], F_GETFD, 0) | O_NONBLOCK);
     SYLAR_ASSERT2(!rt, "fcntl error");
 

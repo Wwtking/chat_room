@@ -92,6 +92,8 @@ public:
      * @details 压缩数据的高位0(无效位),每7位一组,第8位为标志位(1表示后面还有数据,0表示无数据)
      *          4字节类型压缩后实际占用内存(1 ~ 5)
      *          8字节类型压缩后实际占用内存(1 ~ 10)
+     * @attention 无符号类型不需要去转换成zigzag值，因为本身已经是前导0形式
+     *            有符号类型要去转换成zigzag值，因为有负数，前导为1，转成前导0形式
     */
     void writeVint32(int32_t value);
     void writeVuint32(uint32_t value);
@@ -133,6 +135,8 @@ public:
      * @name Variable length 可变长度
      * @brief 从当前节点读出可变长度类型的数据
      * @details 因为读出的数据是压缩过的，要根据每个字节的最高位进行拼接解压
+     * @attention 无符号类型不需要从zigzag值转换int，因为本身已经是前导0形式
+     *            有符号类型要从zigzag值转换int，因为有负数，前导为1，转成前导0形式
     */
     int32_t readVint32();
     uint32_t readVuint32();

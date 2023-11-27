@@ -49,13 +49,13 @@ private:
     bool isDefaultPort() const;
 
 private:
-    std::string m_scheme;
-    std::string m_userinfo;
-    std::string m_host;
-    std::string m_path;
-    std::string m_query;
-    std::string m_fragment;
-    uint32_t m_port;
+    std::string m_scheme;       // 表示URI的协议方案，例如"http"或"https"
+    std::string m_userinfo;     // 表示URI的用户信息
+    std::string m_host;         // 表示URI的主机名或IP地址
+    std::string m_path;         // 表示URI的资源路径
+    std::string m_query;        // 表示URI的查询部分
+    std::string m_fragment;     // 表示URI的片段标识符
+    uint32_t m_port;            // 表示URI的端口号
 };
 
 }

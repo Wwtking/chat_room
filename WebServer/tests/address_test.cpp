@@ -81,7 +81,7 @@ void interface_test() {
 
 void ipv4_test() {
     //auto addr = sylar::IPAddress::Create("www.baidu.com");
-    auto addr = sylar::IPAddress::Create("192.168.88.130");
+    auto addr = sylar::IPAddress::Create("172.18.25.130");
     if(addr) {
         SYLAR_LOG_INFO(g_logger) << addr->toString();
         SYLAR_LOG_INFO(g_logger) << addr->broadcastAddress(24)->toString();  // 广播地址

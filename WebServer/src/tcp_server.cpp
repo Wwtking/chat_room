@@ -9,7 +9,7 @@ static Logger::ptr g_logger = SYLAR_LOG_NAME("system");
 
 // TCP服务器接收超时时间
 static ConfigVar<uint64_t>::ptr g_tcp_server_recv_timeout = Config::Lookup(
-        "tcp_server.recv_timeout", (uint64_t)(2 * 60 * 1000), "tcp server recv timeout");
+        "tcp_server.recv_timeout", (uint64_t)(10 * 60 * 1000), "tcp server recv timeout");
 
 // 匿名空间：将命名空间的名字符号去掉，让其他文件找不到，效果类似于static
 namespace {

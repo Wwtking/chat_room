@@ -159,16 +159,16 @@ public:
     void format(const char* fmt, ...);
 
 private:
-    std::shared_ptr<Logger> m_logger;    // 日志器
-    LogLevel::Level m_level;    // 日志等级
-    const char* m_file = nullptr;    //文件名
-    int32_t m_line;    //行号
-    uint32_t m_elapse;    //程序启动开始到现在的毫秒数
-    uint32_t m_threadId;    //线程ID
-    uint32_t m_fiberId;     //协程ID
-    uint64_t m_time;      //时间戳
-    std::string m_threadName;       //线程名称
-    std::stringstream m_ss;    //日志内容流
+    std::shared_ptr<Logger> m_logger;   // 日志器
+    LogLevel::Level m_level;            // 日志等级
+    const char* m_file = nullptr;       // 文件名
+    int32_t m_line;                     // 行号
+    uint32_t m_elapse;                  // 程序启动开始到现在的毫秒数
+    uint32_t m_threadId;                // 线程ID
+    uint32_t m_fiberId;                 // 协程ID
+    uint64_t m_time;                    // 时间戳
+    std::string m_threadName;           // 线程名称
+    std::stringstream m_ss;             // 日志内容流
 };
 
 
@@ -225,7 +225,7 @@ public:
      * @param[in] event 日志事件
      */
     std::string format(std::shared_ptr<Logger> logger, LogLevel::Level level, LogEvent::ptr event);
-    std::ostream& format(std::ostream& ofs, std::shared_ptr<Logger> logger, LogLevel::Level level, LogEvent::ptr event);
+    std::ostream& format(std::ostream& os, std::shared_ptr<Logger> logger, LogLevel::Level level, LogEvent::ptr event);
 
 public:
     //日志内容项格式化
@@ -256,9 +256,9 @@ public:
     bool isError() { return m_error; }
 
 private:
-    std::string m_pattern;    //日志格式
-    std::vector<FormatItem::ptr> m_items;     //日志格式解析后格式
-    bool m_error = false;       // 是否有错误
+    std::string m_pattern;                  //日志格式
+    std::vector<FormatItem::ptr> m_items;   //日志格式解析后格式
+    bool m_error = false;                   // 是否有错误
 
 };
 
@@ -364,12 +364,12 @@ public:
     std::string toYamlString();
 
 private:
-    std::string m_name;              // 日志名称
-    LogLevel::Level m_level;        // 日志级别
-    std::list<LogAppender::ptr> m_appenders;      // 日志目标集合
-    LogFormatter::ptr m_formatter;      // 日志格式器
-    Logger::ptr m_root;
-    mutable MutexType m_mutex;    //锁类型,加mutable表示在const成员函数中仍可修改
+    std::string m_name;                         // 日志名称
+    LogLevel::Level m_level;                    // 日志级别限制
+    std::list<LogAppender::ptr> m_appenders;    // 日志输出器集合
+    LogFormatter::ptr m_formatter;  // 默认日志格式器(如果输出器appender没有指定格式)
+    Logger::ptr m_root;             // 默认日志器root(如果日志没有输出器appender)
+    mutable MutexType m_mutex;      // 锁类型,加mutable表示在const成员函数中仍可修改
 };
 
 //日志器管理

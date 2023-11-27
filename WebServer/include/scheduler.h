@@ -194,11 +194,11 @@ protected:
     std::vector<uint64_t> m_threadIds;  //线程id数组
     size_t m_threadCount = 0;   //线程数量
     std::atomic<size_t> m_activeThreadCount = {0};  //工作线程数量
-    std::atomic<size_t> m_idleThreadCount = {0};  //空闲线程数量
+    std::atomic<size_t> m_idleThreadCount = {0};    //空闲线程数量
     bool m_stopping = false;   //是否正在停止
     bool m_autoStop = false;   //是否自动停止
     int m_rootThread = 0;  //use_caller为true时,caller线程id
-};  
+};
 
 
 }

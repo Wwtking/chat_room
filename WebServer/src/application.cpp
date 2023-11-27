@@ -140,10 +140,11 @@ int Application::main(int argc, char** argv) {
     // 前面的初始化可以不用在协程里面做，Server的初始化需要用到协程
     m_mainIOManager = std::make_shared<IOManager>(1, true, "main");
     m_mainIOManager->scheduler(std::bind(&Application::run_fiber, this, argc, argv));
+    // 加入循环定时器，防止服务器stop后停止
     m_mainIOManager->addTimer(2000, [](){
         // SYLAR_LOG_INFO(g_logger) << "hello";
     }, true);
-    m_mainIOManager->stop();
+    m_mainIOManager->stop();    // 必须要stop，因为use caller协程
     return 0;
 }
 

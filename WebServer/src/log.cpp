@@ -102,11 +102,11 @@ std::string LogFormatter::format(std::shared_ptr<Logger> logger, LogLevel::Level
     return ss.str();
 }
 //返回输出流类型日志文本
-std::ostream& LogFormatter::format(std::ostream& ofs, std::shared_ptr<Logger> logger, LogLevel::Level level, LogEvent::ptr event) {
+std::ostream& LogFormatter::format(std::ostream& os, std::shared_ptr<Logger> logger, LogLevel::Level level, LogEvent::ptr event) {
     for(auto& i : m_items) {
-        i->format(ofs, logger, level, event);
+        i->format(os, logger, level, event);
     }
-    return ofs;
+    return os;
 }
 
 

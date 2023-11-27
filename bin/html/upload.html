@@ -74,7 +74,7 @@
                         showToastMessage(msg, 'error');
                         continue;
                     }
-                    fetch("http://192.168.88.130:8090/file/upload", {
+                    fetch("http://172.18.25.130:8090/file/upload", {
                         method: "POST",
                         headers: {
                             "Filename": encodeURI(file.name),
@@ -103,7 +103,7 @@
                 formData.append('file', file);  // 添加文件到FormData中，'file'是字段名
 
                 var req = new XMLHttpRequest();
-                uri = "http://192.168.88.130:8090/file/upload";
+                uri = "http://172.18.25.130:8090/file/upload";
                 req.open('POST', uri, true);
                 req.setRequestHeader("Filename", encodeURI(file.name));
                 req.onload = function () {

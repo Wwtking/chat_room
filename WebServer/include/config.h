@@ -53,8 +53,8 @@ public:
     virtual std::string getType() const = 0;
 
 private:
-    std::string m_name;    //配置参数的名称
-    std::string m_description;    //配置参数的描述
+    std::string m_name;         //配置参数的名称
+    std::string m_description;  //配置参数的描述
 
 };
 
@@ -289,7 +289,7 @@ public:
 //ToStr: std::string operator()(const T&)
 //配置参数模板子类,保存对应类型的参数值
 template<class T, class FromStr = LexicalCast<std::string, T>
-                ,class ToStr = LexicalCast<T, std::string> >
+                , class ToStr = LexicalCast<T, std::string> >
 class ConfigVar : public ConfigVarBase {
 public:
     typedef std::shared_ptr<ConfigVar> ptr;

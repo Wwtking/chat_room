@@ -49,9 +49,9 @@
                 }
                 
                 var req = new XMLHttpRequest();
-                uri = "http://192.168.88.130:8090/user/create?account=" + username + "&email=" + email + "&passwd=" + password;
+                uri = "http://172.18.25.130:8090/user/create?account=" + username + "&email=" + email + "&passwd=" + password;
                 req.open('GET', uri, true);
-                req.setRequestHeader("Host", "192.168.88.130:8090");
+                req.setRequestHeader("Host", "172.18.25.130:8090");
                 // Set a function to be called when the request is complete
                 req.onload = function () {
                     if (req.status == 200) {

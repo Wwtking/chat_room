@@ -276,14 +276,6 @@ hash_util.h
 log.h
 /home/wwt/chat_room/WebServer/src/orm/log.h
 
-/home/wwt/chat_room/WebServer/src/orm/orm_util.cpp
-orm_util.h
-/home/wwt/chat_room/WebServer/src/orm/orm_util.h
-util.h
-/home/wwt/chat_room/WebServer/src/orm/util.h
-hash_util.h
-/home/wwt/chat_room/WebServer/src/orm/hash_util.h
-
 /home/wwt/chat_room/WebServer/src/orm/table.cpp
 table.h
 /home/wwt/chat_room/WebServer/src/orm/table.h

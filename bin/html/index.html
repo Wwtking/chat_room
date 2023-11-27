@@ -30,7 +30,7 @@
                 return;
             }
 
-            websocket = new WebSocket("ws://192.168.88.130:8072/wwt/chat");
+            websocket = new WebSocket("ws://172.18.25.130:8072/wwt/chat");
 
             websocket.onerror = function() {
                 write_msg("onerror");

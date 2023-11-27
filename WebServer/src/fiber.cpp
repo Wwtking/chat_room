@@ -52,7 +52,7 @@ Fiber::Fiber() {
     SetThis(this);   //设置当前线程的运行协程
 
     //初始化m_ctx,将当前上下文保存在m_ctx中,成功返回0
-    if(getcontext(&m_ctx)) {  
+    if(getcontext(&m_ctx)) {
         SYLAR_ASSERT2(false, "getcontext error");
     }
 

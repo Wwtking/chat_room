@@ -54,10 +54,10 @@ private:
         void triggerEvent(Event event);
 
         //由于fd有可读和可写两种事件，每种事件的回调函数也可以不一样，所以每个fd都需要保存两个事件类型-回调函数组合
-        EventContext read;   //读事件上下文
-        EventContext write;  //写事件上下文
-        int fd = 0;      //事件关联的句柄
-        Event events = NONE;  //该fd添加了哪些事件的回调函数
+        EventContext read;      //读事件上下文
+        EventContext write;     //写事件上下文
+        int fd = 0;             //事件关联的句柄
+        Event events = NONE;    //该fd添加了哪些事件的回调函数
         MutexType mutex;
     };
 
